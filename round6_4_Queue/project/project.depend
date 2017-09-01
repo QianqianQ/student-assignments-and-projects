@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1500061954 source:c:\users\tracy\desktop\c programming\code\round6_4_queue\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"queue.h"
+
+1499900744 c:\users\tracy\desktop\c programming\code\round6_4_queue\queue.h
+
+1500063266 source:c:\users\tracy\desktop\c programming\code\round6_4_queue\queue.c
+	<stdlib.h>
+	"queue.h"
+	"queuepriv.h"
+	<string.h>
+
+1499900753 c:\users\tracy\desktop\c programming\code\round6_4_queue\queuepriv.h
+	"queue.h"
+
