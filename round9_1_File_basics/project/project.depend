@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1500335681 source:c:\users\tracy\desktop\c programming\code\round9_1_file_basics\main.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"filebasics.h"
+
+1500325416 c:\users\tracy\desktop\c programming\code\round9_1_file_basics\filebasics.h
+
+1500325442 source:c:\users\tracy\desktop\c programming\code\round9_1_file_basics\testifile2.c
+
