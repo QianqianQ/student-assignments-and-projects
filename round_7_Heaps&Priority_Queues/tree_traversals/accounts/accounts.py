@@ -130,7 +130,7 @@ class AccountTree:
         """
         if node is None:
             return
-        yield node.value
+        yield node
         if node.left_child is not None:
             temp = node.left_child
             while temp is not None:
