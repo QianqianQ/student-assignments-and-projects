@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1473827332 source:c:\users\qianqian\desktop\c++_ programming\round 5\m2-transcript\transcript\src\main.cpp
+	"transcript.hpp"
+	<iostream>
+	<algorithm>
+
+1473827332 c:\users\qianqian\desktop\c++_ programming\round 5\m2-transcript\transcript\src\transcript.hpp
+	<string>
+	<list>
+	<utility>
+
+1507960454 source:c:\users\qianqian\desktop\c++_ programming\round 5\m2-transcript\transcript\src\transcript.cpp
+	<list>
+	<utility>
+	<algorithm>
+	<string>
+	<iterator>
+	<iostream>
+	"transcript.hpp"
+

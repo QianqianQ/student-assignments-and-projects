@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1507016181 source:c:\users\qianq\desktop\c++ programming\round 3\m3-bird\m3-bird\src\aviary.cpp
+	"bird.hpp"
+	<string>
+	<vector>
+	<algorithm>
+	<functional>
+	<iostream>
+
+1507016153 c:\users\qianq\desktop\c++ programming\round 3\m3-bird\m3-bird\src\bird.hpp
+	<string>
+	<ostream>
+	<vector>
+	<iostream>
+
+1507015788 source:c:\users\qianq\desktop\c++ programming\round 3\m3-bird\m3-bird\src\main.cpp
+	"bird.hpp"
+	<iostream>
+	<string>
+

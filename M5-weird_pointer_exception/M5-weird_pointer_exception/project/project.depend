@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1507722926 source:c:\users\qianqian\desktop\c++_ programming\round 5\m5-weird_pointer_exception\m5-weird_pointer_exception\src\main.cpp
+	"restrictedPtrEx.hpp"
+	"restrictedInterface.hpp"
+	<iostream>
+
+1508117919 c:\users\qianqian\desktop\c++_ programming\round 5\m5-weird_pointer_exception\m5-weird_pointer_exception\src\restrictedptrex.hpp
+	<exception>
+	<string>
+	<iostream>
+
+1508118462 c:\users\qianqian\desktop\c++_ programming\round 5\m5-weird_pointer_exception\m5-weird_pointer_exception\src\restrictedinterface.hpp
+	"restrictedPtrEx.hpp"
+	<iostream>
+
