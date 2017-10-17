@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1507918719 source:c:\users\qianqian\desktop\c++_ programming\round 5\m5-strprinter\strprinter\src\main.cpp
+	<iterator>
+	<sstream>
+	<stdexcept>
+	"printers.hpp"
+
+1508015376 c:\users\qianqian\desktop\c++_ programming\round 5\m5-strprinter\strprinter\src\printers.hpp
+	<string>
+	<map>
+	<iostream>
+
+1508016093 source:c:\users\qianqian\desktop\c++_ programming\round 5\m5-strprinter\strprinter\src\printers.cpp
+	"printers.hpp"
+	<stdexcept>
+

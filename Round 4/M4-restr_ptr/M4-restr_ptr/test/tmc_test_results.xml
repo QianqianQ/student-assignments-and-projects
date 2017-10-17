@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="3" failures="0" disabled="0" errors="0" timestamp="2017-10-13T10:28:41" time="0.001" name="AllTests">
+  <testsuite name="test_restricted" tests="3" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="test_restricted_assign_value" status="run" time="0" classname="test_restricted" />
+    <testcase name="test_restricted_copy" status="run" time="0" classname="test_restricted" />
+    <testcase name="test_restricted_restrictness" status="run" time="0" classname="test_restricted" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1507791760 source:c:\users\qianqian\desktop\c++ programming\round 4\m4-restr_ptr\m4-restr_ptr\src\main.cpp
+	"restrictedPtr.hpp"
+	"Car.hpp"
+	<iostream>
+
+1507885268 c:\users\qianqian\desktop\c++ programming\round 4\m4-restr_ptr\m4-restr_ptr\src\restrictedptr.hpp
+	<memory>
+	<iostream>
+
+1507022972 c:\users\qianqian\desktop\c++ programming\round 4\m4-restr_ptr\m4-restr_ptr\src\car.hpp
+	<string>
+

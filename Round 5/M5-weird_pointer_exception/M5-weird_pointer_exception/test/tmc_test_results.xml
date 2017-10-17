@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="6" failures="0" disabled="0" errors="0" timestamp="2017-10-16T03:48:01" time="0.034" name="AllTests">
+  <testsuite name="test_restrictedex" tests="6" failures="0" disabled="0" errors="0" time="0.034">
+    <testcase name="test_restrictedex_nullinit" status="run" time="0" classname="test_restrictedex" />
+    <testcase name="test_restrictedex_copy" status="run" time="0" classname="test_restrictedex" />
+    <testcase name="test_restrictedex_correctness" status="run" time="0" classname="test_restrictedex" />
+    <testcase name="test_make_restricted" status="run" time="0" classname="test_restrictedex" />
+    <testcase name="test_copy_restricted" status="run" time="0.013" classname="test_restrictedex" />
+    <testcase name="test_print_restricted" status="run" time="0.021" classname="test_restrictedex" />
+  </testsuite>
+</testsuites>
