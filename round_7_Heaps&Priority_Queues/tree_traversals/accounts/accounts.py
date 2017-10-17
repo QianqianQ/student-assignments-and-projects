@@ -137,7 +137,7 @@ class AccountTree:
                 yield n
                 if temp is not None:
                     temp = temp.right_sibling
-            
+            yield from self._visit_preorder(temp)
         # raise NotImplementedError("_visit_preorder not implemented")
 
     # Exercise 5.2.7
