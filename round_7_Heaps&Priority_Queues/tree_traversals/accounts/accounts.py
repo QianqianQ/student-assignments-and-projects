@@ -82,6 +82,8 @@ class AccountTree:
         """
         if root is None:
             root = self.root
+        if root is None:
+            return None
         for node in self._visit_preorder(root):
             if node.key == key:
                 return node
@@ -128,7 +130,13 @@ class AccountTree:
         """
         if node is None:
             return
-        raise NotImplementedError("_visit_preorder not implemented")
+        yield node.value
+        if node.left_child is not None:
+            temp = node.left_child
+            while temp is not None:
+                self._visit_preorder(temp)
+                temp = temp.right_sibling
+        # raise NotImplementedError("_visit_preorder not implemented")
 
     # Exercise 5.2.7
     # NOTE: You don't need to implement _visit_postorder to get full points
@@ -160,7 +168,8 @@ class AccountTree:
         if self.root is None:
             return
         for node in iterator(self.root):
-            yield (node.key, node.value)
+            if node is not None:
+                yield (node.key, node.value)
 
     def _str(self, iterator):
         report_string = "{0} {1:>7}\n".format("Account", "Value")
