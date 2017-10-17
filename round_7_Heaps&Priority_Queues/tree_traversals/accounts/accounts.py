@@ -132,9 +132,11 @@ class AccountTree:
             return
         yield node
         temp = node.left_child
-        for n in self._visit_preorder(temp):
-            yield n
-            temp = n.right_sibling
+        while temp is not None:
+            for n in self._visit_preorder(temp):
+                yield n
+                if temp is not None:
+                    temp = temp.right_sibling
             
         # raise NotImplementedError("_visit_preorder not implemented")
 
