@@ -23,23 +23,34 @@ class Human():
             return True
 
     def pay_salary(self, amount):
-        raise NotImplementedError("Implement this method!")        
+        self.__money += amount
+              
         
     def return_money(self):
-        raise NotImplementedError("Implement this method!")        
+        return self.__money      
     
     def return_married_to(self):
-        raise NotImplementedError("Implement this method!")
+        return self.__married_to
     
     def get_married(self, human):
-        raise NotImplementedError("Implement this method!")
+        self.__married_to = human
+        human.__married_to= self
     
     def __str__(self):
-        raise NotImplementedError("Implement this method!")
+        return "{} {}".format(self.__first_name,self.__last_name)
     
 def create_humans():
-    raise NotImplementedError("Implement this function!")
+    human1 = Human("Teemu","Teekkari",0,30)
+    human2 = Human("Onni","Opiskelija",1000,22)
+    human3 = Human("Anni","Arkkari",2000,23)
+    human1.buy_something(100)
+    human2.buy_something(500)
+    human1.pay_salary(2500)
+    human1.get_married(human3)
+    human3.increment_age()
+    print(human2)
+    return human1,human2,human3
 
 if __name__ == "__main__":
-    create_humans()
+    human1,human2,human3 = Human.create_humans()
     
