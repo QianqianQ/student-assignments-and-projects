@@ -129,14 +129,17 @@ class AccountTree:
         Yield nodes in preorder starting from node.
         """
         if node is None:
-            return 
-        yield node.value
-        if node.left_child is not None:
-            temp = node.left_child
-            while temp is not None:
-                self._visit_preorder(temp)
+            return
+        yield node
+        temp = node.left_child
+        while temp is not None:
+            for n in self._visit_preorder(temp):
+                yield n
+            if temp is not None:
                 temp = temp.right_sibling
-        raise NotImplementedError("_visit_preorder not implemented")
+        
+
+        # raise NotImplementedError("_visit_preorder not implemented")
 
     # Exercise 5.2.7
     # NOTE: You don't need to implement _visit_postorder to get full points
@@ -150,7 +153,14 @@ class AccountTree:
         """
         if node is None:
             return
-        raise NotImplementedError("_visit_postorder not implemented")
+        temp = node.left_child
+        while temp is not None:
+            for n in self._visit_postorder(temp):
+                yield n
+            if temp is not None:
+                temp = temp.right_sibling
+        yield node
+        # raise NotImplementedError("_visit_postorder not implemented")
 
     # Implement the traversal methods above
 

@@ -116,7 +116,7 @@ def postorder_not_implemented():
         return True
     except:
         pass
-    return False 
+    return False
 
 
 @unittest.skipIf(postorder_not_implemented(), 'AccountTree._visit_postorder not implemented')

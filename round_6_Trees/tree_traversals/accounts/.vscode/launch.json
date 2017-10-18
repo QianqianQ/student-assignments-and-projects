@@ -4,13 +4,12 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "Python",
             "type": "python",
             "request": "launch",
-            "stopOnEntry": false,
-            "pythonPath": "D:/Python2.7/python.exe",
+            "stopOnEntry": true,
+            "pythonPath": "${config:python.pythonPath}",
             "program": "${file}",
             "cwd": "${workspaceRoot}",
             "env": {},
