@@ -153,7 +153,14 @@ class AccountTree:
         """
         if node is None:
             return
-        raise NotImplementedError("_visit_postorder not implemented")
+        temp = node.left_child
+        while temp is not None:
+            for n in self._visit_postorder(temp):
+                yield n
+            if temp is not None:
+                temp = temp.right_sibling
+        yield node
+        # raise NotImplementedError("_visit_postorder not implemented")
 
     # Implement the traversal methods above
 
