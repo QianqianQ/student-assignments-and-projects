@@ -28,7 +28,7 @@
 class StringPrinter
 {
 public:
-    StringPrinter(std::ostream& ios=std::cout);
+    StringPrinter(std::ostream& os=std::cout);
     virtual ~StringPrinter(){};
     virtual StringPrinter* clone() const =0;
     virtual StringPrinter& operator()(const std::string&)=0;
