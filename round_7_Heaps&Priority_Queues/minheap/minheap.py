@@ -119,16 +119,11 @@ class MinHeap:
 
     def _higher_priority(self, i, j):
         """Return True if element at index i has a higher priority than the element at index j, else False."""
-        if self.is_empty:
-            return False
-        if i>self.size or j>self.size:
-            return False
         if self.array[i][0]<self.array[j][0]:
             return True
         else:
             return False
-    
-        raise NotImplementedError("MinHeap._higher_priority not yet implemented.")
+        # raise NotImplementedError("MinHeap._higher_priority not yet implemented.")
 
 
     def insert(self, pair):
@@ -136,23 +131,35 @@ class MinHeap:
         self.size +=1
         self.array.append(pair)
         i = self.size -1
-        while i>0 and self._higher_priority(pair[0],(i-1)/2)
-
-        raise NotImplementedError("MinHeap.insert not yet implemented.")
+        self._heapify_up(i)
+        # raise NotImplementedError("MinHeap.insert not yet implemented.")
 
 
     def top(self):
         """Return the object at the top of the heap or None if heap is empty. """
         if self.is_empty():
             return None
-        return self.array[0]
-        raise NotImplementedError("MinHeap.top not yet implemented.")
+        return self.array[0][1]
+        # raise NotImplementedError("MinHeap.top not yet implemented.")
 
 
     def _heapify_down(self, i):
         """Restore heap property from the element at i to the last leaf."""
         while 0 <= i < self.size and not self._is_leaf(i):
-            raise NotImplementedError("MinHeap._heapify_down not yet implemented.")
+            l = self._left_child(i)
+            r = self._right_child(i)
+            if self._higher_priority(i,l):
+                highest = i
+            else:
+                highest = l
+            if r!=-1 and self._higher_priority(r,highest):
+                highest= r
+            if highest == i:
+                break
+            else:
+                self._swap(i,highest)
+                i = highest
+            # raise NotImplementedError("MinHeap._heapify_down not yet implemented.")
 
 
     def pop(self):
@@ -161,5 +168,12 @@ class MinHeap:
         # Raise error if the heap is empty
         if self.is_empty():
             raise RuntimeError("Cannot pop from an empty heap.")
-        raise NotImplementedError("MinHeap.pop not yet implemented.")
+        self._swap(0,self.size-1)
+        min_value=self.array.pop()
+        self.size -=1
+        self.buildheap()
+        return min_value[1]
+        # raise NotImplementedError("MinHeap.pop not yet implemented.")
+
+
 
