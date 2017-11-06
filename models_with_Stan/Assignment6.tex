@@ -1,0 +1,122 @@
+\documentclass[article,11pt]{article}
+\usepackage{listingsutf8}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pythonhighlight}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{enumitem}   
+\title{\huge Bayesian Data Analysis - Assignment 6}
+\begin{document}
+ \maketitle
+ \section{Linear model: drowning data with Stan}
+ x = year \\
+ y = number of people drown \\
+ $y \sim \mathcal{N}(\alpha+\beta x, \sigma^{2})$
+ \subsection*{i)}
+ \begin{figure}[H]
+ 	\centering
+ 	\captionsetup{justification=centering}
+ 	\includegraphics[width=10cm]{1_1.jpeg}
+ 	\caption{Trend in the number of people drown}
+ \end{figure}
+From the Figure 1, we can conclude that the number of people drown per year decreases.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=10cm]{1_2.jpeg}
+	\caption{histogram of the slope}
+\end{figure}
+\noindent{From the Figure 2, we can see that the slope are between [-6,-1]$<0$, showing that the trend is decreasing. The mean of the slope is around -3.31, the central-95\% interval is [-4.35,-2.31].}
+
+\subsection*{ii)}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=10cm]{1_3.jpeg}
+	\caption{histogram of the posterior predictive distribution}
+\end{figure}
+\begin{center}
+	$\mu_{\tilde{y}}\approx 156$
+\end{center}
+
+\noindent{Stan:}
+\verbatiminput{drowning.stan}
+R code:
+\verbatiminput{Gussian_linear_model.R}
+
+
+\section{Hierarchical model: factory data with Stan}
+(The R code is in the end of the report)
+\subsection{separate model}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=7cm]{separate_mu6.jpeg}
+	\caption{histogram of the $\mu_{6}\mid y_{6}$}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=7cm]{se_ypred6.jpeg}
+	\caption{histogram of the $\tilde{y}_{6}\mid y_{6}$}
+\end{figure}
+\textbf{i)} The mean of $\mu_{6}$ is around 86.16, with the central 95\%-interval: [58.69, 121.07].\\
+\textbf{ii)} The mean of $\tilde{y}_{6}$ is around 85.13, with the central 95\%-interval: [4.92, 160.63].\\
+\textbf{iii)} Each machine has its own model, and we don't have any data related to the 7th machine, so we can not work out the posterior distribution of $\mu_{7}$.\\
+
+\noindent{Stan:}
+\verbatiminput{separate_factory.stan}
+
+\subsection{pooled model}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=7cm]{pooled_mu6.jpeg}
+	\caption{histogram of the $\mu_{6}\mid y$}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=7cm]{pooled_y6.jpeg}
+	\caption{histogram of the $\tilde{y}_{6}\mid y$}
+\end{figure}
+\textbf{i)} The mean of $\mu_{6}$ is around 93.10, with the central 95\%-interval: [85.95, 100.39].\\
+\textbf{ii)} The mean of $\tilde{y}_{6}$ is around 92.94, with the central 95\%-interval: [55.36, 132.21].\\
+\textbf{iii)} all the machines share the same model, so the posterior distribution of $\mu_{7}$ is the same as $\mu_{6}$ .\\
+
+\noindent{Stan:}
+\verbatiminput{pooled_factory.stan}
+
+\subsection{hierarchical model}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=7cm]{hier_mu6.jpeg}
+	\caption{histogram of the $\mu_{6}\mid y_{6}$}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=7cm]{hier_ypred6.jpeg}
+	\caption{histogram of the $\tilde{y}_{6}\mid y_{6}$}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=7cm]{hier_mu7.jpeg}
+	\caption{histogram of the $\mu_{7}\mid y$}
+\end{figure}
+\textbf{i)} The mean of $\mu_{6}$ is around 87.68, with the central 95\%-interval: [75.50, 99.40].\\
+\textbf{ii)} The mean of $\tilde{y}_{6}$ is around 87.62, with the central 95\%-interval: [55.14 120.33].\\
+\textbf{iii)} The mean of $\mu_{7}$ is around 92.85, with the central 95\%-interval: [51.45, 131.94].\\
+
+\noindent{Stan:}
+\verbatiminput{hierarchical_factory.stan} 
+
+\noindent{R code:}
+\verbatiminput{factory.R}
+\end{document}
