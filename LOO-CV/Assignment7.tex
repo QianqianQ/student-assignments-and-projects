@@ -1,0 +1,49 @@
+\documentclass[article,11pt]{article}
+\usepackage{listingsutf8}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pythonhighlight}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{enumitem}   
+\title{\huge Bayesian Data Analysis - Assignment 7}
+\begin{document}
+ \maketitle
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Model Type} & \textbf{PSIS-LOO} & \textbf{$\bf{p_{eff}}$} & \textbf{k-value($\bf{k>0.7})$)}   \\ \hline\hline
+		Pooled  & -131.0168 &2.042215  &  0 (0.0\%)    \\ \hline
+		Separate & -132.8809 & 10.13113 &   4 (13.3\%)  \\ \hline
+		Hierarchical &-126.6512  & 5.536214  &  0(0.0\%) \\ \hline
+	\end{tabular}
+	\label{tab:t1}
+\end{table}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=15cm]{3_kvalues.jpeg}
+	\caption{histogram of the k-values}
+\end{figure}
+\noindent{From the above table and figure, we can get the following conclusion: }\\ \\
+1. All the k-values of the pooled model and those of the hierarchical model are less than or equal to 0.7. So the PSIS-LOO estimate of the pooled model and hierarchical model can be considered to be reliable.\\ \\
+2. There are 13.3 of the k-values are more than 0.7 using separate model. So the PSIS-LOO estimate of the separate model can not be considered to be reliable. \\ \\ 
+3. Considering the differences of the PSIS-LOO value between the three model as well, hierachical model should be selected. Because it has the highest PSIS-LOO value, meaning that it fits the data best, and it is a reliable model as we discuss before.
+\\
+\\
+\appendix
+\leftline{\LARGE \textbf{Appendix}}
+\section{Stan}
+\subsection{Pooled model}
+\verbatiminput{pooled_factory.stan}
+\subsection{Separate model}
+\verbatiminput{separate_factory.stan}
+\subsection{Hierachical model}
+\verbatiminput{hierarchical_factory.stan}	
+\section{R code}
+\verbatiminput{factory.R}
+\end{document}
