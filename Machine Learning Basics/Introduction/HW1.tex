@@ -1,0 +1,240 @@
+% *** DOCUMENT TYPE ***
+\documentclass[article,11pt]{article}
+
+% *** GRAPHICS RELATED PACKAGES ***
+\usepackage{caption}
+\usepackage{graphicx}
+\graphicspath{{resources/}} % path where graphic files are
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png} % graphic files extensions
+
+% *** LENGUAGE RELATED PACKAGES ***
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+% *** MATH RELATED PACKAGES ***
+\usepackage{amsmath}
+\usepackage{bm, amssymb}
+
+% *** OTHER PACKAGES ***
+\usepackage{fullpage}
+\usepackage{url}
+
+% *** COMMANDS AND MACROS ***
+\renewcommand*{\thesection}{Problem~\arabic{section}:}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\input{mlbp17_macros}
+
+
+% *** DOCUMENT TITLE ***
+\title{CS-E3210- Machine Learning Basic Principles \\ Home Assignment 1 - ``Introduction''}
+\begin{document}
+\date{}
+\maketitle
+
+Your solutions to the following problems should be submitted as one single pdf which does not contain 
+any personal information (student ID or name). The only rule for the layout of your submission is that 
+each problem has to correspond to one single page, which has to include the problem statement on top 
+and your solution below. You are welcome to use the \LaTeX-file underlying this pdf, 
+available under \url{https://version.aalto.fi/gitlab/junga1/MLBP2017Public}, and fill in your solutions there. 
+
+
+
+% *** PROBLEM 1 ***
+\newpage
+\section{Let The Data Speak - I}
+In the folder ``Webcam'' at \url{https://version.aalto.fi/gitlab/junga1/MLBP2017Public} you will find $\samplesize=7$  
+webcam snapshots $\vz^{(1)},\ldots,\vz^{(\samplesize)}$ with filename ``shot??.jpg''. Import these snapshots into your favourite 
+programming environment (Matlab, Python, etc.) and determine for each snapshot $\vz^{(\sampleidx)}$ its greenness $x_{g}^{(\sampleidx)}$ 
+and redness $x_{r}^{(\sampleidx)}$ by summing the green and red intensities over all image pixels (cf.\ \url{https://en.wikipedia.org/wiki/RGB_color_model}). 
+Produce a scatter plot (cf.\ \url{https://en.wikipedia.org/wiki/Scatter_plot}) with the points $\vx^{(\sampleidx)}=(x^{(\sampleidx)}_{r},x^{(\sampleidx)}_{g})^{T} \in \mathbb{R}^{2}$, for $i=1,\ldots,\samplesize$. 
+Do not forget to label the axes of your plot. 
+%wher
+%with $x$-axis representing the redness and $y$-axis representing the greenness. 
+
+\noindent{\bf Answer.}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Images} & \textbf{Red} & \textbf{Green} \\ \hline\hline
+shot1           & 65069350       & 65398449        \\ \hline
+shot2           & 64797631       & 64619047         \\ \hline
+shot3           & 62725984       & 63548262         \\ \hline
+shot4           & 58760119       & 58666604         \\ \hline
+shot5           & 58960696       & 57416785         \\ \hline
+shot6           & 60470606       & 61338129         \\ \hline
+shot7           & 60728760      & 59001882         \\ \hline
+\end{tabular}
+\caption{Green and red pixel intensities for each image.}
+\label{tab:t1}
+\end{table}
+ \ref{fig:cats1}.
+
+\vspace*{-1ex}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=8.8cm]{1_1.jpeg}
+\end{center}
+\caption{Scatter plot - Redness vs Greenness}
+\label{fig:cats1}
+\end{figure}
+
+
+% *** PROBLEM 2 ***
+\newpage
+\section{Let The Data Speak - II}
+Familiarize yourself with random number generation in your favourite 
+programming environment (Matlab, Python, etc.). In particular, try to generate a data set 
+$\{ \vz^{(\sampleidx)} \}_{i=1}^{\samplesize}$ containing $\samplesize=100$ vectors $\vz^{(\sampleidx)} \in \mathbb{R}^{10}$, which 
+are drawn from (i.i.d. realizations of) a Gaussian distribution $\mathcal{N}(\mathbf{0},\mathbf{I})$ with zero mean and covariance 
+matrix being the identity matrix $\mathbf{I}$. For each data point $\vz^{(\sampleidx)}$, compute the two 
+features 
+\begin{equation}
+x_{1}^{(\sampleidx)} = \mathbf{u}^{T} \vz^{(\sampleidx)} \mbox{, and } x_{2}^{(\sampleidx)}= \mathbf{v}^{T} \vz^{(\sampleidx)}, 
+\end{equation}
+with the vectors $\mathbf{u}\!=\!(1,0,\ldots,0)^{T}\in \mathbb{R}^{10}$ and $\mathbf{v}\!=\!(9/10,1/10,0,\ldots,0)^{T}\in \mathbb{R}^{10}$. 
+Produce a scatter plot (cf.\ \url{https://en.wikipedia.org/wiki/Scatter_plot}) with the points 
+$\vx^{(\sampleidx)}=(x^{(\sampleidx)}_{1},x^{(\sampleidx)}_{2})^{T} \in \mathbb{R}^{2}$, for $\sampleidx=1,\ldots,\samplesize$. 
+Do not forget to label the axes of your plot. 
+
+\noindent{\bf Answer.}
+ \ref{fig:cats2}.
+
+\vspace*{-1ex}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=8.8cm]{1_2.jpeg}
+\end{center}
+\caption{Scatter plot - $x_{1}$ vs $x_{2}$}
+\label{fig:cats2}
+\end{figure}
+
+
+% *** PROBLEM 3 ***
+\newpage
+\section{Statistician's Viewpoint}
+
+Consider you are provided a spreadsheet whose rows contain the data points $\vz^{(\sampleidx)}=(\sampleidx,y^{(\sampleidx)})$, with row index $\sampleidx=1,\ldots,\samplesize$.  
+A statistician might be interested in studying how to model the data using a probabilistic model, e.g., 
+\begin{equation} 
+y^{(\sampleidx)} = \mu + \sigma e^{(\sampleidx)} 
+\end{equation}
+where $e^{(\sampleidx)}$ are i.i.d. standard normal random variables, i.e., $e^{(\sampleidx)} \sim \mathcal{N}(0,1)$.
+\begin{itemize}
+\item Which choice for $\mu$ best fits the observed data?
+\item Given the optimum choice for $\mu$, what would be the best guess for $y^{(\samplesize+1)}$?
+\item Can we somehow quantify the uncertainty in this prediction?
+\end{itemize}
+
+\noindent {\bf Answer.}
+
+The $\mu$ value that would best fit the observed data is: \\
+\indent{Based on the Maximum Likelihood Estimation method,} \\ 
+\begin{center}
+$y^{(i)} \sim \mathcal{N}(\mu,\sigma^{2})$ \\
+$\mu_{{ML}}=arg\mathop{max}\limits_{\mu}p(Y \mid \mu) = arg\mathop{max}\limits_{\mu}\prod\limits_{i=1}^{N}p(y^{(i)}\mid \mu)$\\
+$\frac{dp(Y \mid \mu)}{d \mu}=0$
+\end{center}
+
+\begin{equation}
+	\mu = \bar{y}= \frac{\sum\limits_{i=1}^{N}y^{(i)}}{N}
+\end{equation}
+
+\indent{The best prediction for $y^{(\samplesize+1)}$ would be:} \\
+\indent{Based on knowledge about posterior predivtive distributions,} 
+\begin{equation}
+y^{(\samplesize+1)} = \bar{y}= \frac{\sum\limits_{i=1}^{N}y^{(i)}}{N}
+\end{equation}
+
+The uncertainty of the prediction can be quantified as: \\
+\indent{Based on the Mean Square Error and Maximum Likelihood Estimation methods,} \\
+\indent{and we know that $\bar{y}$ is an unbiased estimator,}
+\begin{equation}
+\begin{aligned}
+MSE = & Bias(\bar{y})^{2}+Var(\bar{y}) \\
+	= & 0 + \frac{\sigma^{2}}{N} \\
+	= & \frac{\sigma^{2}}{N}\\
+	SE_{\bar{y}} = \frac{\sigma}{\sqrt{N}}\\
+\end{aligned}
+\end{equation}
+
+% *** PROBLEM 4 ***
+\newpage
+\section{Three Random Variables}
+Consider the following table which indicates the presence of a particular property 
+(`A', `B' or `C') for a number of items (each item corresponds to one row). 
+% where each row corresponds to the presence of 
+%some property for a particular item. You can assume that the items are independent. 
+
+\begin{tabular}{c|c|c}
+\hline\hline
+A & B & C \\ [0.5ex] % inserts table %heading
+\hline
+1 & 0 & 1\\
+1 & 1 & 0 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\hline
+\end{tabular}
+
+\begin{itemize}
+\item Can we predict if an item has property `B' if we know the presence of property `C' ?
+\item Can we predict if an item has property `A' if we know the presence of property `C' ?
+\end{itemize} 
+
+\noindent {\bf Answer.} \\ \\
+$P(\bar{B} \mid C)=1,P(B \mid C)=0, P(\bar{B} \mid C)+P(B \mid C)=1$ \\
+$P(B \mid \bar{C})=1, P(\bar{B} \mid \bar{C})=0, P(B \mid \bar{C})+P(\bar{B} \mid \bar{C})=1$ \\
+We can predict if an item has property `B' if we know the presence of property `C'. If an item has property 'C', we can predict that it does not have property 'B'; and if it does not have 'C', it will have 'B'.\\ \\
+$P(\bar{A} \mid C)=0, P(A\mid C)=1,P(\bar{A} \mid C)+P(A\mid C)=1$\\
+$P(A \mid \bar{C})=1, P(\bar{A}\mid \bar{C})=0,P(A \mid \bar{C})+P(\bar{A}\mid \bar{C})=1$\\
+We can predict if an item has property `A' if we know the presence of property `C'. The item samples show that an item always has property 'A', no matter whether it has 'C' or not.\\ \\
+
+\noindent{(If the size of samples is big enough, we can use fisher's exact test (or chi-square test) to do correspondence analysis.)}
+
+\begin{figure}[!h]
+	\centering
+	\begin{minipage}{.45\textwidth}
+		\centering
+		\hspace*{0em}\includegraphics[width=1.1\linewidth]{1_4_1.jpeg}
+		\caption{Stacked bar C-B}
+		\label{fig:cats3}
+	\end{minipage}\hspace{1cm}
+	\begin{minipage}{.45\textwidth}
+		\centering
+		\hspace*{0em}\includegraphics[width=1.1\linewidth]{1_4_2.jpeg}
+		\caption{Stacked bar C-A}
+		\label{fig:cats4}
+	\end{minipage}
+\end{figure}
+% *** PROBLEM 5 ***
+\newpage
+\section{Expectations}
+Consider a $d$-dimensional Gaussian random vector $\vx \sim \mathcal{N}(\mathbf{0},\mathbf{I})$, 
+a random variable $e \sim \mathcal{N}(0,\sigma^{2})$. 
+For a fixed (non-random) vector $\mathbf{w}_{0} \in \mathbb{R}^{d}$, we construct the random variable $y= \vw_{0}^{T} \vx + e$. 
+Now consider another arbitrary (non-random) vector $\mathbf{w} \in \mathbb{R}^{d}$. 
+Find a closed-form expression for the expectation $\expect [ ( y - \vw^{T} \vx )^{2} ]$ in terms of the variance $\sigma^{2}$ and the vectors $\vw, \vw_{0}$. 
+
+\noindent {\bf Answer.}
+
+\begin{align*}
+\expect \{( y - \vw^{T} \vx )^{2} \} & =\expect \{ ((\vw_{0}^{T}-\vw^{T})\vx+e) * ((\vw_{0}^{T}-\vw^{T})\vx+e)\} \\
+& = \expect \{ (\vw_{0}^{T}-\vw^{T})^{2}\vx^{2} + 2e(\vw_{0}^{T}-\vw^{T})\vx+e^{2} \} \\
+& = (\vw_{0}^{T}-\vw^{T})^{2} \expect [\vx^{2}] + 2(\vw_{0}^{T}-\vw^{T})\expect[e\vx]+\expect[e^{2}]
+\end{align*}
+
+\begin{center}
+	$\expect[\vx^{2}]=Var(\vx)+\expect[\vx]^{2} = [1,1,...1]^{T} \in \mathbb{R}^{d}$ \\
+	$\expect[e\vx]=\frac{\mu_{e}\sigma_{\vx}^2+\mu_{\vx}\sigma_{e}^2}{\sigma_{e}^{2}+\sigma_{\vx}^{2}}=0 $ \\
+	$\expect[e^{2}]=\expect[(e-\expect[e])*(e-\expect[e])]=\sigma^{2}$
+\end{center}
+
+\begin{align*}
+	\expect \{( y - \vw^{T} \vx )^{2} \}&=(\vw_{0}^{T}-\vw^{T})^{2}[1,1,...1]^{T}+\sigma^{2} \\
+	  &=(\vw_{0}-\vw)^{T}(\vw_{0}-\vw)+\sigma^{2}
+\end{align*}
+\end{document}

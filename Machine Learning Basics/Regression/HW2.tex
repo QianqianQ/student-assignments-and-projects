@@ -1,0 +1,228 @@
+
+\documentclass[article,11pt]{article}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{bm, amssymb}
+\renewcommand*{\thesection}{Problem~\arabic{section}:}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\input{mlbp17_macros}
+
+\newcommand{\coefflen}{p}
+\setlength{\textheight}{53\baselineskip} % number of lines per side
+\setlength{\textheight}{51\baselineskip} % number of lines per side
+\textwidth176mm
+\oddsidemargin=-8mm
+\evensidemargin=-8mm  %Rand auf geraden Seiten ist etwa 24.5mm
+\topmargin=-12mm
+\unitlength1mm
+%\pagestyle{headings}
+%\renewcommand{\baselinestretch}{1.5}  % 1.1 fache des normalen Zeilenabstandes
+\renewcommand{\textfraction}{0.0}      % 10% einer Seite mit Gleitobjekt muÃ Text sein
+\addtolength{\hoffset}{-0.5cm}
+\addtolength{\voffset}{0.3cm}
+\addtolength{\topmargin}{-0.5cm}
+\addtolength{\textwidth}{1cm}
+\addtolength{\textheight}{1cm}
+
+\title{CS-E3210- Machine Learning Basic Principles \\ Home Assignment 2 - ``Regression''}
+\begin{document}
+\date{}
+\maketitle
+
+Your solutions to the following problems should be submitted as one single pdf which does not contain 
+any personal information (student ID or name). The only rule for the layout of your submission is that for each 
+problem there has to be exactly one separate page containing the answer to the problem. You are welcome to use the \LaTeX-file underlying this pdf, 
+available under \url{https://version.aalto.fi/gitlab/junga1/MLBP2017Public}, and fill in your solutions there. 
+
+\newpage
+\section{``Plain Vanilla'' Linear Regression}
+\label{problem_1}
+\noindent{\bf Answer.}\\
+
+\begin{center}
+	$\bf{X}=\left[ \vx \quad 1\right] $\\
+\end{center}
+To minimize empirical risk $\emperror(h(\cdot) | \dataset)$,we can directly solve
+where its gradients are 0:
+
+\begin{equation}
+\nabla_{w}\emperror(h(\cdot) | \dataset)=0
+\end{equation}
+\begin{equation}
+	\frac{1}{N}\nabla_{w}\lVert \bf{X} \vw-\vy \rVert_{2}^{2}=0
+\end{equation}
+\begin{equation}
+	\nabla_{w}(\bf{X}\vw-\vy)^{T}(\bf{X}\vw-\vy)=0
+\end{equation}
+\begin{equation}
+\nabla_{w}(\vw^{T}\bf{X}^{T}\bf{X}\vw-2\vw^{T}\bf{X}^{T}\vy+\vy^{T}\vy)=0
+\end{equation}
+\begin{equation}
+2\bf{X}^{T}\bf{X}\vw-2\bf{X}^{T}\vy=0
+\end{equation}
+\begin{equation}
+	\vw_{\rm opt}=(\bf{X}^{T}\bf{X})^{-1}\bf{X}^{T}\vy
+\end{equation}
+\begin{center}
+	(Notice that $\bf{X}^{T}\bf{X}$ should be invertible)
+\end{center}
+
+\newpage
+\section{``Plain Vanilla'' Linear Regression - Figure}
+\label{problem_1}
+\noindent{\bf Answer.}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=15cm]{problem2.png}
+	\caption{Plot of the optimal predictor and the data points}
+\end{figure}
+\begin{equation}
+	\vw_{\rm opt} \approx \left[\begin{matrix}
+	6.15 \\
+	-440 \\
+	\end{matrix} 
+	 \right] 
+\end{equation}
+The empirical risk:
+\begin{equation}
+\begin{aligned}
+\emperror(h(\cdot) | \dataset) & = \frac{1}{\samplesize}\sum^{\samplesize}_{\sampleidx=1}(y^{(\sampleidx)} - h(\vx^{(\sampleidx)}))^2 \\
+	& \approx 783
+\end{aligned}
+\end{equation}
+The empirical risk is not small enough, so it is not feasible to predict the daytime accurately from the greenness.
+\newpage
+
+
+\newpage
+
+\section{Regularized Linear Regression}
+\noindent {\bf Answer:}
+\begin{center}
+	$\bf{X}=\left[ \vx \quad 1\right] $\\
+\end{center}
+\begin{equation}
+\nabla_{w}\big(  \emperror(h^{(\mathbf{w})}(\cdot) | \dataset)+ \lambda \| \vw \|^{2} \big)=0
+\end{equation}
+\begin{equation}
+	\nabla_{w}\big(  \frac{1}{N}\lVert \bf{X} \vw-\vy \rVert_{2}^{2}+ \lambda \| \vw \|^{2} \big)=0
+\end{equation}
+\begin{equation}
+\nabla_{w}\big(  \frac{1}{N}(\bf{X}\vw-\vy)^{T}(\bf{X}\vw-\vy)+ \lambda \vw^{T}\vw \big)=0
+\end{equation}
+\begin{equation}
+	\frac{1}{N}\nabla_{w}(\bf{X}\vw-\vy)^{T}(\bf{X}\vw-\vy)+\nabla_{w}(\lambda \vw^{T}\vw) = 0
+\end{equation}
+From the Problem 1, 
+\begin{equation}
+	\nabla_{w}(\bf{X}\vw-\vy)^{T}(\bf{X}\vw-\vy)=2\bf{X}^{T}\bf{X}\vw-2\bf{X}^{T}\vy
+\end{equation}
+\begin{equation}
+\begin{aligned}
+& \frac{1}{N}(2\bf{X}^{T}\bf{X}\vw-2\bf{X}^{T}\vy)+\nabla_{w}(\lambda \vw^{T}\vw)\\ 
+=& \frac{1}{N}(2\bf{X}^{T}\bf{X}\vw-2\bf{X}^{T}\vy) + 2\lambda \vw \\ =& 0
+\end{aligned}	
+\end{equation}
+\begin{equation}
+	\bf{X}^{T}\bf{X} \vw-\bf{X}^{T}\vy+\bm{N}\lambda \bm{I}\vw = 0
+\end{equation}
+\begin{equation}
+	\vw=(\bf{X}^{T}\bf{X}+\bm{N}\lambda \bm{I})^{-1}\bf{X}^{T}\vy
+\end{equation}
+\newpage
+\section{Regularized Linear Regression - Figure}
+\noindent {\bf Answer:}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=15cm]{2_4.png}
+	\caption{Plot of the regularized linear regression}
+\end{figure}
+
+\noindent{$(\emperror(h^{(\mathbf{w})}(\cdot) | \dataset)+ \lambda \| \vw \|^{2})_{\lambda=2}\approx 4804$}\\
+	$(\emperror(h^{(\mathbf{w})}(\cdot) | \dataset)+ \lambda \| \vw \|^{2})_{\lambda=5} \approx 4844$\\
+
+\noindent{So $\lambda = 2$ is a better choice. }
+\newpage
+
+
+\section{Gradient Descent for Linear Regression}
+\noindent {\bf Answer:}\\
+the length d of the feature vector $\vx(i)$ is $100 \times 100 = 10000$.\\
+(If taking into account dummy features 1, the length of the feature vector is 10001)
+
+\begin{center}
+	$\bf{X}=\left[ \vx \quad 1\right] $\\
+\end{center}
+\begin{equation}
+\begin{aligned}
+\nabla_{\vw} f(\vw) &=\nabla_{\vw} \frac{1}{\samplesize}\sum^{\samplesize}_{\sampleidx=1}(y^{(\sampleidx)} - \vw^{T} \vx^{(\sampleidx)})^2 \\
+&= -\frac{2}{N}\sum^{\samplesize}_{\sampleidx=1}\vx^{(i)}(y^{(\sampleidx)} - \vw^{T} \vx^{(\sampleidx)}) \\
+& = \frac{2}{N}(\bf{X}^{T}\bf{X}\vw-\bf{X}^{T}\vy)
+\end{aligned}
+\end{equation}
+We can also get the closed-form expression from the Problem 1.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=15cm]{2_5.png}
+	\caption{Gradient Descent for Linear Regression}
+\end{figure}
+Stopping criteria: \\ 
+1. Identify when the error (emprical risk, etc.)  is small enough to stop.\\
+2. Stop when the gradient is small enough (the difference no longer decreases or decreases too slowly). \\
+3. Limit the maximum amount of time spent iterating.\\
+\newpage
+\section{Gradient Descent for Regularized Linear Regression}
+\noindent {\bf Answer:}\\
+From the Problem 3,
+\begin{equation}
+\nabla_{\vw} f(\vw)= \frac{2}{N}(\bf{X}^{T}\bf{X}\vw-\bf{X}^{T}\vy)+2\lambda\vw
+\end{equation}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=15cm]{2_6.png}
+	\caption{Gradient Descent for Regularized Linear Regression}
+\end{figure}
+\noindent{After iterations, the converged empirical risk is bigger than that of linear regression (it is not obvious in the figure).}
+\newpage
+\section{Kernel Regression}
+\noindent {\bf Answer:}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering}
+	\includegraphics[width=15cm]{2_7.png}
+	\caption{Plot of Kernel Regression}
+\end{figure}
+\begin{center}
+
+$\emperror(h^{(\sigma)}| \dataset)_{\sigma=1} \approx 70.0	$\\
+$\emperror(h^{(\sigma)}| \dataset)_{\sigma=5} \approx 850.6	$\\
+$\emperror(h^{(\sigma)}| \dataset)_{\sigma=10} \approx 1510.4 $\\
+\end{center}
+So choosing $\sigma=1$ achieves the lowest mean squared error.
+\newpage
+\section{Linear Regression using Feature Maps}
+\noindent {\bf Answer:}\\
+Yes, there is a feature map ${\bm \phi}$ which allows to approximate the true hypothesis $h^{*}(\cdot)$ (
+which satisfies ((9)) by some predictor $h^{(\mathbf{w}_{0})}(x) =  \mathbf{w}_{0}^{T} {\bm \phi}(x)$ with a suitably chosen weight $\mathbf{w}_{0}$. \\ \\
+Yes, there is a feature map ${\bm \phi}$ and weight vector $\mathbf{w}_{0} \in \mathbb{R}^{n}$ such that $|h^{(\mathbf{w}_{0})}(x) - h^{*}(x)| \leq 10^{-3}$ for all $x \in \mathbb{R}$.\\
+
+\noindent{$\phi$ is a piecewise function.}
+\begin{equation}
+\phi(x)=
+\begin{cases}
+0& x \notin [0,10]\\
+\phi_{sub}(x)& x \in [0,10]
+\end{cases}
+\end{equation}
+
+\end{document}

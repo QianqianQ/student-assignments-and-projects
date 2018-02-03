@@ -1,0 +1,61 @@
+\documentclass[article,11pt]{article}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{bm, amssymb}
+\usepackage{subfigure}
+\renewcommand*{\thesection}{Problem~\arabic{section}:}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\newcommand{\cluster}{\mathcal{C}}
+
+\input{mlbp17_macros}
+
+\title{CS-E3210- Machine Learning Basic Principles \\ Home Assignment 5 - ``Clustering''}
+\begin{document}
+\date{}
+\maketitle
+
+Your solutions to the following problems should be submitted as one single pdf which does not contain 
+any personal information (student ID or name).  The only rule for the layout of your submission is that for each 
+problem there has to be exactly one separate page containing the answer to the problem. You are welcome to use the \LaTeX-file underlying this pdf, 
+available under \url{https://version.aalto.fi/gitlab/junga1/MLBP2017Public}, and fill in your solutions there. 
+
+\newpage
+
+\section{Hard Clustering}
+\noindent {\bf Answer.}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8cm]{p1_cluster.png}
+	\end{center}
+	\caption{Clustering}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=7cm]{p1_p.png}
+	\end{center}
+	\caption{Average purity}
+\end{figure}
+\noindent{From the Figure 2, we can see that the average purity oscillates around 0.1, with min $\approx 0.086$, max $\approx$ 0.136.}
+\newpage
+
+\section{Soft Clustering}
+\noindent {\bf Answer.}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8cm]{p2_cluster.png}
+	\end{center}
+	\caption{Clustering}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=7cm]{p2_p.png}
+	\end{center}
+	\caption{Average purity}
+\end{figure}
+After decreasing rapidly, the average purity will oscillates around 0.05.
+\end{document}

@@ -1,0 +1,173 @@
+\documentclass[article,11pt]{article}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{bm, amssymb}
+\usepackage{subfigure}
+\renewcommand*{\thesection}{Problem~\arabic{section}:}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\input{mlbp17_macros}
+
+\title{CS-E3210- Machine Learning Basic Principles \\ Home Assignment 3 - ``Classification''}
+\begin{document}
+\date{}
+\maketitle
+
+Your solutions to the following problems should be submitted as one single pdf which does not contain 
+any personal information (student ID or name).  The only rule for the layout of your submission is that for each 
+problem there has to be exactly one separate page containing the answer to the problem. You are welcome to use the \LaTeX-file underlying this pdf, 
+available under \url{https://version.aalto.fi/gitlab/junga1/MLBP2017Public}, and fill in your solutions there. 
+
+\newpage
+
+\section{Logistic Regression - I}
+\noindent {\bf Answer.}
+
+\begin{equation}
+\begin{aligned}
+& P(y=1|\vx;\vw) = h^{(\vw)}(\vx)=\frac{1}{1+\exp(-\vw^{T}\vx)} \\
+&
+P(y=-1|\vx;\vw) = 1- P(y=1|\vx;\vw) =\frac{1}{1+\exp(\vw^{T}\vx)}	\\
+&
+P(y \mid \vx)= \frac{1}{1+\exp(-y\vw^{T}\vx)} \\
+\end{aligned}
+\end{equation}
+\\
+\begin{equation}
+\begin{aligned}
+& \max_{\vw \in \mathbb{R}^{2}} \ln\big(P(y\!=\!1|\vx^{(1)};\vw) P(y\!=\!-1|\vx^{(2)};\vw)\big)  \\
+= &
+\max_{\vw \in \mathbb{R}^{2}}\sum_{\sampleidx=1}^{\samplesize=2}\ln P(y^{(i)}|\vx^{(i)};\vw)  \\
+= &
+\max_{\vw \in \mathbb{R}^{2}}\sum_{\sampleidx=1}^{\samplesize=2}\ln \big( \frac{1}{1+\exp(-y^{(i)}\vw^{T}\vx^{(i)})} \big)\\
+= & \max_{\vw \in \mathbb{R}^{2}}\sum_{\sampleidx=1}^{\samplesize=2}-\ln \big( 1+\exp(-y^{(i)}\vw^{T}\vx^{(i)}) \big) \\
+= &
+\min\limits_{\vw \in \mathbb{R}^{2}} \sum_{\sampleidx=1}^{\samplesize=2} 
+\ln\big(1 + \exp\big(- y^{(i)} (\vw^{T} \vx^{(i)})\big)\big) 
+\end{aligned}
+\end{equation}
+\\
+\begin{equation}
+\begin{aligned}
+&\min\limits_{\vw \in \mathbb{R}^{2}}(1/\samplesize) \sum_{\sampleidx=1}^{\samplesize=2} L((\vx^{(\sampleidx)},y^{(\sampleidx)}); \vw) \\
+=&
+(1/\samplesize)\min\limits_{\vw \in \mathbb{R}^{2}} \sum_{\sampleidx=1}^{\samplesize=2} 
+\ln\big(1 + \exp\big(- y^{(i)} (\vw^{T} \vx^{(i)})\big)\big) \\
+\end{aligned}
+\end{equation}
+To get minimal empirical risk, we need to get the minimal $\sum_{\sampleidx=1}^{\samplesize=2} 
+\ln\big(1 + \exp\big(- y^{(i)} (\vw^{T} \vx^{(i)})\big)\big)$.  
+\\
+As (2) showed, $\vw_{ML}$ satisfies this requirement. So $\vw_{ML}$ is a solution to the empirical risk minimization problem.
+
+\newpage
+
+\section{Logistic Regression - II}
+\noindent {\bf Answer.}
+\begin{equation}
+\begin{aligned}
+& \nabla_{\vw^{(k)}} (1/\samplesize) \sum_{\sampleidx=1}^{\samplesize} L((\vx^{(\sampleidx)},y^{(\sampleidx)}); \vw^{(k)}) \\
+= & 
+(1/\samplesize) \nabla_{\vw^{(k)}} \sum_{\sampleidx=1}^{\samplesize} \ln\big(1\!+\!\exp\big(- y^{(i)} ((\vw^{(k)})^{T} \vx^{(i)})\big)\big) \\
+= &
+(1/\samplesize) \sum_{\sampleidx=1}^{\samplesize} \frac{-y^{(i)}\vx^{(i)}\exp\big(- y^{(i)} ((\vw^{(k)})^{T} \vx^{(i)})\big)}{1\!+\!\exp\big(- y^{(i)} ((\vw^{(k)})^{T} \vx^{(i)})\big)} \\
+= &
+(1/\samplesize) \sum_{\sampleidx=1}^{\samplesize} \frac{-y^{(i)}\vx^{(i)}}{1\!+\!\exp\big( y^{(i)} ((\vw^{(k)})^{T} \vx^{(i)})\big)}
+\end{aligned}
+\end{equation}
+\newpage
+
+\section{Bayes' Classifier - I}
+\noindent {\bf Answer.}
+\begin{equation}
+	p(y\not = h(\vx))=1-p(y = h(\vx))
+\end{equation}
+To minimize the error probability, maximizing $p(y=h(\vx))$.\\ Based on MAP,
+\begin{equation}
+\begin{aligned}
+	h(\vx)&=\argmax_{y \in \{-1,1\}}p(y \mid \vx) \\
+		  &= \argmax_{y \in \{-1,1\}}p(y)p(\vx \mid y)
+\end{aligned}
+\end{equation}
+Expressed in log-space:
+	\begin{equation}
+	\begin{aligned}
+	h(\vx)&=\argmax_{y \in \{-1,1\}}\log p(y \mid \vx) \\
+	&= \argmax_{y \in \{-1,1\}}\big (\log p(y)+ \log p(\vx \mid y)\big )
+	\end{aligned}
+	\end{equation}
+\newpage
+
+\section{Bayes' Classifier - II}
+\noindent {\bf Answer.}\\
+\begin{center}
+	$P(y=-1)=1-P_{1}$
+\end{center}
+From the Problem 3, 
+\begin{equation}
+\begin{aligned}
+h(\vx)&=\argmax_{y \in \{-1,1\}}\log p(y \mid \vx) \\
+&= \argmax_{y \in \{-1,1\}}\big (\log p(y)+ \log p(\vx \mid y)\big )
+\end{aligned}
+\end{equation}
+We have had knowledge of the $P(y)$.\\
+\begin{equation}
+\argmax_{y \in \{-1,1\}}\log p(\vx \mid y)  \\
+\end{equation}
+Based on Maximum Likelihood Method, \\
+Similar to the calculation process in the Homework 1, Problem 3 (The partial derivatives of $ \log p(\vx \mid y)= 0$), we get
+\begin{center}
+$\vm_{s}=\frac{1}{NP_{1}}\sum^{N}_{\sampleidx=1}\mathcal{I}(y^{(i)}=1)\vx^{(i)}$ 
+\end{center}
+\begin{center}
+	$\vm_{w}=\frac{1}{N(1-P_{1})}\sum^{N}_{\sampleidx=1}\mathcal{I}(y^{(i)}=-1)\vx^{(i)} $
+\end{center}
+\begin{center}
+	$\mathbf{C}_{s} =\frac{1}{NP_{1}}\sum^{N}_{\sampleidx=1}\mathcal{I}(y^{(i)}=1)(\vx^{(i)}-\vm_{s})(\vx^{(i)}-\vm_{s})^{T}$
+\end{center}
+\begin{center}
+	$\mathbf{C}_{w} =\frac{1}{N(1-P_{1})}\sum^{N}_{\sampleidx=1}\mathcal{I}(y^{(i)}=-1)(\vx^{(i)}-\vm_{w})(\vx^{(i)}-\vm_{w})^{T} $
+\end{center}
+
+
+
+\newpage
+\section{Support Vector Classifier}
+Consider data points with features $\vx^{(\sampleidx)} \in \mathbb{R}^{2}$ and labels $y^{(\sampleidx)} \in \{-1,1\}$. 
+In the figures below, the data points with $y^{(\sampleidx)}=1$ are depicted as red crosses 
+and the data points with  $y^{(\sampleidx)}=-1$ are depicted as blue filled circles. 
+Which of the four figures depicts a decision boundary which could have been generated by a SVC. Justify your selection.
+	
+	\begin{figure}[ht!]
+		\begin{center}
+			\subfigure[]{%
+				\includegraphics[width=0.2\textwidth]{SVM_1.PNG}
+			}%
+			\subfigure[]{%
+				\includegraphics[width=0.2\textwidth]{SVM_2.PNG}
+			}
+			\subfigure[]{%
+				\includegraphics[width=0.2\textwidth]{SVM_3.PNG}
+			}%
+			\subfigure[]{%
+				\includegraphics[width=0.2\textwidth]{SVM_4.PNG}
+			}
+		\end{center}
+	\end{figure}
+\noindent {\bf Answer.}\\ \\
+Figure (c) depicts a decision boundary which could have been generated by a SVC.\\ \\
+SVC is a linear classifier using hypothesis $h^{w}(\vx)=\vw^{T}\vx$. It is based on geometry of $\dataset$ in feature space.\\
+ hinge loss:
+\begin{equation}
+\begin{aligned}
+L\big((\vx,y),h^{\vw,b}\big) & = \max\{0,1-y(\vw^{T}\vx)\} \\
+						   & = \min \xi \quad s.t.\quad \xi \ge 1- y(\vw^{T}\vx)
+\end{aligned}	
+\end{equation}
+Minimizing hinge loss equivalent to maximizing margin $y(\vw^{T}\vx)$.\\
+There should be some distance between the hyperplane and the support vectors. The sum of the distances of two classes' support vectors from hyperplane is $\gamma = \frac{2}{\Vert\vw \Vert}$. 
+\end{document}

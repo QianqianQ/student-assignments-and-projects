@@ -1,0 +1,155 @@
+\documentclass[article,11pt]{article}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{bm, amssymb}
+\renewcommand*{\thesection}{Problem~\arabic{section}:}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\input{mlbp17_macros}
+
+% add to macros
+\newcommand{\mC}[0]{{\bf C}}
+
+
+
+\title{CS-E3210- Machine Learning Basic Principles \\
+	Home Assignment - ``Validation"}
+\begin{document}
+\date{}
+%\author{by Stefan Mojsilovi? and Alex Jung}
+\maketitle
+
+Your solutions to the following problems should be submitted as one single pdf which does not contain 
+any personal information (student ID or name).  The only rule for the layout of your submission is that for each 
+problem there has to be exactly one separate page containing the answer to the problem. You are welcome to use the \LaTeX-file underlying this pdf, 
+available under \url{https://version.aalto.fi/gitlab/junga1/MLBP2017Public}, and fill in your solutions there. 
+
+%For the problems requiring K-fold cross validation, please see the following link: \url{https://www.cs.cmu.edu/~schneide/tut5/node42.html} for a simple, yet effective explanation.
+
+
+
+\newpage
+
+\section{The Training Error is not the Generalization Error}
+
+\noindent{\bf Answer.}
+\begin{enumerate}
+\item 
+Based on Law of Large Numbers,
+\begin{equation}
+	\lim_{N \to \infty}\emperror \left( \vw | \dataset\right) = \generror \left( \vw \right)
+\end{equation}
+\item 
+\begin{equation}
+ \begin{aligned}
+ \generror \left( \vw \right)= & 
+\expect \{ ((\bar{\vw} - \vw)^{T} \vx+\varepsilon)^2\} \\
+ = &
+ \expect \{ (\bar{\vw}-\vw)^{T}\vx \vx^{T}(\bar{\vw}-\vw) + 2\varepsilon(\bar{\vw}-\vw)^{T}\vx+\varepsilon^{2} \} \\
+ = & 
+  (\bar{\vw}-\vw)^{T}\expect[\vx \vx^{T}](\bar{\vw}-\vw) + 2(\bar{\vw}-\vw)^{T}\expect[\vx \varepsilon]+\expect[\varepsilon^{2}] 
+ \end{aligned}
+\end{equation}\\
+\begin{equation}
+\begin{aligned}
+	(\vx^{T},\varepsilon)^{T} \sim \mathcal{N}(\mathbf{0},\mathbf{C}) \\
+\expect[\vx \vx^{T}]= Var(\vx)+\expect[\vx]^{2} =  \mathbf{C}_{11} \\
+\expect[\vx \varepsilon]=\expect[\vx] \expect[\varepsilon]+Cov(\vx,\varepsilon) = \mathbf{C}_{12}=\mathbf{C}_{21} \\
+\expect[\varepsilon^{2}] =\mathbf{C}_{22}
+\end{aligned}
+\end{equation}\\
+\begin{equation}
+\begin{aligned}
+\generror \left( \vw \right)
+= & 
+(\bar{\vw}-\vw)^{T}\mathbf{C}_{11}(\bar{\vw}-\vw) + 2(\bar{\vw}-\vw)^{T}\mathbf{C}_{12}+\mathbf{C}_{22} \\
+\end{aligned}
+\end{equation}
+
+\item 
+We choose $\vw = \bar{\vw}$, such that the predictor $h^{(\vw)}$ has small generatlization error $\generror \left( \vw \right) = \mathbf{C}_{22}$.
+\end{enumerate}
+\newpage
+
+\section{Overfitting in Linear Regression}
+\noindent{\bf Answer.} \\
+Gathering  $\{ \vx^{(\sampleidx)} \}_{\sampleidx=1}^{\samplesize}$ as $\mathbf{X}$. The columns of $\mathbf{X}$ form a linearly independent set. According to the invertible matrix theorem, $\mathbf{X}$ and $\mathbf{X}^{T}$ are invertible.
+\begin{equation}
+\begin{aligned}
+\nabla_{w}\emperror(h^{(\vw)}(\cdot) | \dataset)=0 \\
+\frac{1}{N}\nabla_{w}\lVert \bf{X} \vw-\vy \rVert_{2}^{2}=0 \\
+\nabla_{w}(\bf{X}\vw-\vy)^{T}(\bf{X}\vw-\vy)=0 \\
+\nabla_{w}(\vw^{T}\bf{X}^{T}\bf{X}\vw-2\vw^{T}\bf{X}^{T}\vy+\vy^{T}\vy)=0 \\
+2\bf{X}^{T}\bf{X}\vw-2\bf{X}^{T}\vy=0 \\
+\vw = \mathbf{X}^{-1}\vy
+\end{aligned}
+\end{equation}
+When $\vw = \mathbf{X}^{-1}\vy$, 
+ $\emperror(h^{(\vw)}(\cdot) | \dataset)=\frac{1}{N}\lVert \vy-\bf{X} \vw \rVert_{2}^{2}=0$.
+\newpage
+
+\section{Probability of Sampling Disjoint Datasets}
+\noindent{\bf Answer.}\\
+Sampling without replacement:
+\begin{equation}
+\begin{aligned}
+	P = & 
+\frac{\mathbf{C}_{3}^{10}\mathbf{C}_{2}^{7}}{\mathbf{C}_{3}^{10}\mathbf{C}_{2}^{10}} = 
+\frac{\binom{10}{3}\binom{7}{2}}{\binom{10}{3}\binom{10}{2}}\\
+= &
+\frac{42}{90} \\
+\approx &
+46.7 \%
+\end{aligned}
+\end{equation}\\
+Sampling with replacement:
+\begin{equation}
+\begin{aligned}
+P = &\frac{H_{3}^{10}H_{2}^{7}}{H_{3}^{10}H_{2}^{10}}
+= \frac{C^{7+2-1}_{2}}{C_{2}^{10+2-1}} \\
+= & \frac{28}{55} \\
+\approx & 50.9 \%
+\end{aligned}
+\end{equation}
+
+\newpage
+\section{The Histogram of the Prediction Error}  
+\noindent {\bf Answer.}
+\begin{enumerate}
+\item 
+To minimize empirical risk $\emperror(h(\cdot) | \dataset)$,we can directly solve
+where its gradients are 0. From the Homework 2, Problem 1,
+\begin{equation}
+\begin{aligned}
+\nabla_{w}\emperror(h^{(\vw)}(\cdot) | \dataset^{(train)})=0 \\
+\vw_{\rm opt}=(\bf{X}^{T}\bf{X})^{-1}\bf{X}^{T}\vy\\
+(\bf{X}^{T}\bf{X} \text{ is invertible})
+\end{aligned}
+\end{equation}
+\item The sampling method used is sampling from $\dataset^{(val)}$ without replacement.\\ 
+The empirical risk is 0.25482349589. The prediction error is small.
+\item 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8.8cm]{problem4.png}
+	\end{center}
+	\caption{Histogram of the prediction error}
+\end{figure}
+From the obtained histogram, we can see that the prediction error fluctuates. And after repeating the experiments many times, there is no obvious rules found in prediction error distribution. So it is not a good idea to evaluate the error only for one single test dataset. It is better to evaluate the error for multiple test dataset and then to compute their mean.
+\end{enumerate}
+\newpage
+\section{K-fold Cross Validation}
+\noindent {\bf Answer.}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=13cm]{problem5.png}
+	\end{center}
+	\caption{Histogram of the prediction error}
+\end{figure}
+\noindent{We can see that the testing error is minimized when r=200. So the best model complexity is r=200.}
+\end{document}
