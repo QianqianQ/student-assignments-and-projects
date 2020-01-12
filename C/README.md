@@ -1,6 +1,9 @@
 # C-Programming
+Assignments and a simple small project in the course *Basic Course in C programming* 
 ## C-Programming-Project
 A simple program that simulates a zoo
+
+src: Project.c
 
 Functions including: Add an animal, Delete an animal, List available food types, Define diet, Eating food, Print zoo information, Save zoo to a file, Loading zoo from a file, Exit program.
 
