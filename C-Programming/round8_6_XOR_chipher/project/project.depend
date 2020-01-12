@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1500271870 source:c:\users\tracy\desktop\c programming\code\round8_6_xor_chipher\main.c
+	<time.h>
+	<stdlib.h>
+	<stdio.h>
+	<stdint.h>
+	<string.h>
+	"xorcipher.h"
+
+1500271852 c:\users\tracy\desktop\c programming\code\round8_6_xor_chipher\xorcipher.h
+

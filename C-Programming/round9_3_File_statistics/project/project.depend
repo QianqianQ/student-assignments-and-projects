@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1501754266 source:c:\users\tracy\desktop\c programming\code\round9_3_file_statistics\main.c
+	<stdio.h>
+	"filestats.h"
+	<stdlib.h>
+
+1500469072 c:\users\tracy\desktop\c programming\code\round9_3_file_statistics\filestats.h
+
+1501753314 source:c:\users\tracy\desktop\c programming\code\round9_3_file_statistics\filestats.c
+	<stdio.h>
+	"filestats.h"
+	<stdlib.h>
+	<ctype.h>
+

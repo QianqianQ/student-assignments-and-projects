@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1500552138 source:c:\users\tracy\desktop\c programming\code\round9_4_shop\main.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"aaltoshop.h"
+
+1500552147 c:\users\tracy\desktop\c programming\code\round9_4_shop\aaltoshop.h
+
+1501768857 source:c:\users\tracy\desktop\c programming\code\round9_4_shop\aaltoshop.c
+	"aaltoshop.h"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+

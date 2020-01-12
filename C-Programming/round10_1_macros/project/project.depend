@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1502090487 source:f:\学习资料\c programming\code\round10_1_macros\main.c
+	<stdio.h>
+	<assert.h>
+	<stdlib.h>
+	"macros.h"
+
+1502402302 f:\学习资料\c programming\code\round10_1_macros\macros.h
+

@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1503975179 source:f:\学习资料\c programming\code\round8_4_bits_operations\main.c
+	<stdio.h>
+	"bits.h"
+	<math.h>
+	<string.h>
+
+1499950193 f:\学习资料\c programming\code\round8_4_bits_operations\bits.h
+
