@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1506938524 source:c:\users\qianq\desktop\c++ programming\round 3\m3-register\m3-register\src\main.cpp
+	<iostream>
+	"register.hpp"
+
+1507221435 c:\users\qianq\desktop\c++ programming\round 3\m3-register\m3-register\src\register.hpp
+	<string>
+	<vector>
+	<iostream>
+	<fstream>
+	<sstream>
+	<iterator>
+	<cstdlib>
+
+1507223948 source:c:\users\qianq\desktop\c++ programming\round 3\m3-register\m3-register\src\register.cpp
+	"register.hpp"
+	<fstream>
+	<iostream>
+

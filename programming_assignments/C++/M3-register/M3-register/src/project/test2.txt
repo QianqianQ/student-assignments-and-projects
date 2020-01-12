@@ -1,0 +1,10 @@
+A;G_BOAC;British Airways;Concorde SST;80.8;2000
+C;YUU-123;Teemu Teekkari;Volkswagen Polo;800;1
+A;RU-123;Russian Federation;MiG-21;80.8;1600
+C;EES-321;Nikola;Tesla;600;0
+B;FI123;Pekka Purjehtija;Mariella;1.8;0
+A;G_BOAC;British Airways;Concorde SST;80.8;2000
+C;YUU-123;Teemu Teekkari;Volkswagen Polo;800;1
+A;RU-123;Russian Federation;MiG-21;80.8;1600
+C;EES-321;Nikola;Tesla;600;0
+B;FI123;Pekka Purjehtija;Mariella;1.8;0

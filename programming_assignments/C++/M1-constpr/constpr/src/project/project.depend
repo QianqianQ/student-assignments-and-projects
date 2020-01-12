@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1505571437 source:c:\users\qianq\desktop\c++ programming\round 1\m1-constpr\constpr\src\constpr.cpp
+	"constpr.hpp"
+	<iostream>
+
+1505571436 c:\users\qianq\desktop\c++ programming\round 1\m1-constpr\constpr\src\constpr.hpp
+	<string>
+	<vector>
+
+1505571249 source:c:\users\qianq\desktop\c++ programming\round 1\m1-constpr\constpr\src\main.cpp
+	<cstddef>
+	<iostream>
+	"constpr.hpp"
+

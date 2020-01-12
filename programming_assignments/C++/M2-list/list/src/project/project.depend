@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1506392747 source:c:\users\qianq\desktop\c++ programming\round 2\m2-list\list\src\list.cpp
+	"list.hpp"
+	<iostream>
+
+1473827332 c:\users\qianq\desktop\c++ programming\round 2\m2-list\list\src\list.hpp
+	<iostream>
+	<list>
+	<string>
+
+1473827332 source:c:\users\qianq\desktop\c++ programming\round 2\m2-list\list\src\main.cpp
+	"list.hpp"
+	<cstdlib>
+	<fstream>
+	<iostream>
+
