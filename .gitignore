@@ -141,19 +141,19 @@ ENV/
 *.hex
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
+**/[Dd]ebug/
+**/[Dd]ebugPublic/
+**/[Rr]elease/
+**/[Rr]eleases/
+**/x64/
+**/x86/
+**/[Aa][Rr][Mm]/
+**/[Aa][Rr][Mm]64/
+**/bld/
+**/[Bb]in/
+**/[Oo]bj/
+**/[Ll]og/
+**/[Ll]ogs/
 
 # Debug files
 *.dSYM/
@@ -171,3 +171,9 @@ Mkfile.old
 dkms.conf
 
 **/C_programming/**/project/
+*.cbp
+*.layout
+*.depend
+
+**/Cplusplus_programming/**/project/
+**/Cplusplus_programming/**/nbproject/

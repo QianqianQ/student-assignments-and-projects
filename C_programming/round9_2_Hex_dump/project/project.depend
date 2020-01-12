@@ -1,9 +1,0 @@
-# depslib dependency file v1.0
-1500468720 source:c:\users\tracy\desktop\c programming\code\round9_2_hex_dump\main.c
-	<stdio.h>
-	<string.h>
-	"hexread.h"
-	<stdlib.h>
-
-1500339927 c:\users\tracy\desktop\c programming\code\round9_2_hex_dump\hexread.h
-

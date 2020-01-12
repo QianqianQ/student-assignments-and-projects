@@ -1,9 +1,0 @@
-# depslib dependency file v1.0
-1502090532 source:c:\users\tracy\desktop\c programming\code\round10_3_function_pointer\main.c
-	<stdlib.h>
-	<stdio.h>
-	<string.h>
-	"shopfunctions.h"
-
-1502090540 c:\users\tracy\desktop\c programming\code\round10_3_function_pointer\shopfunctions.h
-
