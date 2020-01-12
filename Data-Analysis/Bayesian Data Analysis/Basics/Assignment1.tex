@@ -1,0 +1,211 @@
+\documentclass{article} 
+\usepackage{listingsutf8}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+  \title{\huge Bayesian Data Analysis - Assignment 1} 
+\begin{document} 
+  \maketitle 
+  \section{Basic probability theory and terms} 
+    \subsection*{a)} 
+      \paragraph*{probability}is the measure of the likelihood of a given event's occurrence, which is expressed as a number between 0 and 1. 
+      \paragraph*{probability mass}is a function that gives the probability that a discrete random variable is exactly equal to some value. ($f_{X}(x)=P(X=x)=P(\{s \in S:X(s)=x\})$)
+      \paragraph*{probability density}is a function of a continuous variable whose integral over a region gives the probability that a random variable falls within the region. ($P(a \leqslant X \leqslant b)= \int_a^b f_{X}(x) \,dx$)
+      \paragraph*{probability mass function (pmf)}is a function that gives the probability that a discrete random variable is exactly equal to some value.
+      \paragraph*{probability density function (pdf)}is a function of a continuous variable whose integral over a region gives the probability that a random variable falls within the region.
+      \paragraph*{probability distribution}is a function that provides the possibilities of occurrence of all the different possible values (events).
+      \paragraph*{discrete probability distribution} is a table (or a formula) listing all possible values that a discrete variable can take on, together with the associated probabilities.
+      \paragraph*{continuous probability distribution}describes the probabilities of the possible values of a continuous random variable. 
+      \paragraph*{cumulative distribution function (cdf)}is a function that gives probability that random variable is less than or equal to a value. ($F_{X}(x) =P(X \leqslant x) $) 
+  	\subsection*{b)}
+  	 \paragraph*{sampling distribution}is the probability distribution of sample statistics based on randomly selected samples from the same population. 
+  	 \paragraph*{observation model}is a mathematical model (probability distribution) that relates the parameters of the model to the observations.
+  	 \paragraph*{statistical model}is a class of mathematical model (probability distribution) on sample space, which embodies a set of assumptions concerning the generation of some sample data, and similar data from a larger population.  
+  	 \paragraph*{likelihood}is a function of the parameters of a statistical model given data, which is equal to the probability (density) assumed for those observed outcomes given those parameter values. ($L(\theta \mid x)=P(x \mid \theta)$)
+  	 
+  \section{Basic computer skills} 
+   The language used is Python. The source code is attached in the appendix.
+    \subsection*{a)}
+     \begin{figure}[H]
+    	\centering
+    	\captionsetup{justification=centering}
+    	\includegraphics[width=10cm]{a.jpeg}
+        \caption{density function}
+     \end{figure}
+  
+ 	\subsection*{b)}
+ 	\begin{figure}[H]
+ 		\centering
+ 		\captionsetup{justification=centering}
+ 		\includegraphics[width=10cm]{b.jpeg}
+ 		\caption{histogram of the samples}
+ 	\end{figure}
+ 	We can see that its curve trend is very similar to that of the density function.
+ 	\subsection*{c)}
+ 		\begin{table}[H]	
+ 		\centering
+ 		\begin{tabular}{r|c|c}
+ 		 \hline	
+ 	\quad  & mean    & variance \\
+ 	\hline
+ 	sample  & 0.199498  & 0.009546 \\
+ 	true    & 0.200000  & 0.010000 \\
+ 	\hline
+ 	  \end{tabular}
+	 \end{table}
+    From the table, we can see that the sample mean and variance match (roughly) to the true mean and variance of the distribution.
+ 	\subsection*{d)}	
+ 		\begin{center}
+		The central 95 \%-intercal: [ 0.05141249  0.41952854]
+		\end{center}
+	
+  \section{Bayes' theorem}
+	Assume that A is the event that having lung cancer, B is the event that test gives a positive result.
+	\begin{gather*}
+		P(A)= 0.001\\
+		P(B \mid A)= 0.98 \\
+		P(B \mid \bar{A})= \bar{P}(\bar{B} \mid \bar{A})=0.04 \\
+	\end{gather*}
+	\begin{equation*}
+	 \begin{aligned}
+	 P(B)&=P(B \mid A)P(A)+P(B \mid \bar{A})P(\bar{A})\\
+	 	 &=0.04094
+	 \end{aligned}
+	\end{equation*}
+	If the test gives a positive result, the probability of having lung cancer:
+	\begin{equation*}
+	 \begin{aligned}
+		P(A \mid B)&= \frac{P(B \mid A)P(A)}{P(B)} \\
+				   &= \frac{49}{2047} \approx 2.4\%
+	 \end{aligned}
+	\end{equation*}	
+	There is only a possibility of 2.4\% having lung cancer when the test gives a positive result. So I think it is not a good idea to introduce the test to market.
+	(The claimed 97\% successful rate maybe comes from a unreasonable ratio of healthy testees to testees having lung cancer. A relatively high proportion of testees having lung cancer will cause higher succeessful rate. However, we should take into account that lung cancer is rare in general population)
+  \section{Bayes' theorem}
+   \paragraph{}The probabilities of selecting box A, B, C:
+    \begin{gather*}
+      P(A)=\frac{2}{5} \\
+      P(B)=\frac{1}{10} \\
+      P(C)=\frac{1}{2}
+    \end{gather*}
+   \paragraph{}The probabilities of picking up a red ball from box A, B, C separately:
+   \begin{gather*}
+  		P(red \mid A)=\frac{2}{7} \\
+  		P(red \mid B)=\frac{4}{5} \\
+  		P(red \mid C)=\frac{1}{4} 
+  	\end{gather*}
+   \paragraph{}The probabilities of picking up a red ball:
+    \begin{equation*}
+     \begin{aligned}
+     P(red)&=P(A)P(red \mid A)+P(B)P(red \mid B)+P(C)P(red \mid C)\\
+     	   &=\frac{2}{5} \times \frac{2}{7} + \frac{1}{10} \times \frac{4}{5} + \frac{1}{2} \times \frac{1}{4}\\
+     	   &= \frac{447}{1400} \approx 31.9\%
+     \end{aligned}
+    \end{equation*}
+   \paragraph{}If a red ball is picked up, the probabilities of picking up from box A, B, C separately:
+   \begin{equation*}
+  	 \begin{aligned}
+  			P(A \mid red)&=\frac{P(red \mid A)P(A)}{P(red)}\\
+  						&= \frac{160}{447}
+  	 \end{aligned} 		
+  	\end{equation*}
+   \begin{equation*}
+  	\begin{aligned}
+  			P(B \mid red)&=\frac{P(red \mid B)P(B)}{P(red)}\\
+						&= \frac{112}{447}
+  	\end{aligned} 		
+   \end{equation*}
+   \begin{equation*}
+  	\begin{aligned}
+  			P(C \mid red)&=\frac{P(red \mid C)P(C)}{P(red)}\\
+  						&= \frac{175}{447}
+  	\end{aligned} 		
+   \end{equation*}
+   \paragraph{}So it mostly came from box C.
+  
+  \section{Bayes' theorem}	
+  	\begin{gather*}
+  		P(fraternal \quad twins)= \frac{1}{125} \\
+  		P(identical \quad twins)= \frac{1}{300} \\
+  		P(males)=P(females)= \frac{1}{2}\\
+  		P(male \quad twins \mid fraternal \quad twins)= \frac{1}{4} \\
+  		P(male \quad twins \mid identical \quad twins)= \frac{1}{2}
+  	\end{gather*}
+  	\paragraph{}The probability of birth of male twins:
+  	 \begin{equation*}
+  	  \begin{aligned}
+  	 	P(male \quad twins)&=P(fraternal \quad twins)P(male \quad twins \mid fraternal \quad twins)\\
+  	 	& \quad +P(identical \quad twins)P(male \quad twins \mid identical \quad twins) \\
+  	 	&= \frac{11}{3000}
+  	  \end{aligned}
+	 \end{equation*}
+	\paragraph{}The probability that the male twins are identical twins:
+	\begin{equation*}
+	 \begin{aligned}
+	 &P(identical \quad twins \mid male \quad twins)\\
+	 =&\frac{P(male \quad twins \mid identical \quad twins)P(identical \quad twins)}{P(male \quad twins)}\\
+	 		=& \frac{5}{11} \approx 45.5\%
+	 \end{aligned}		
+	\end{equation*}
+
+ \clearpage
+ \appendix
+ \leftline{\LARGE \textbf{Appendix}}
+ \section* {{\large Source code}}
+	\begin{lstlisting}[language=python]
+	import numpy as np
+	from scipy.stats import beta
+	import matplotlib.pyplot as plt
+	
+	# a)
+	mean = 0.2
+	var = 0.01
+	a = mean*((mean*(1-mean)/var)-1)
+	b = a*(1-mean)/mean
+	
+	x = np.arange(0.0, 1.0, 0.001)
+	y = beta.pdf(x, a, b)
+	
+	plt.figure()
+	plt.plot(x, y)
+	plt.xlabel('x')
+	plt.ylabel('Beta(x,a,b)')
+	plt.title("density function of Beta-distribution")
+	plt.grid(True)
+	
+	
+	# b)
+	samples = beta.rvs(a, b, size=1000)
+	plt.figure()
+	plt.hist(samples, 20)
+	plt.xlim([0, 1])
+	plt.xlabel('x')
+	plt.ylabel('frequency')
+	plt.title("histogram of 1000 samples")
+	
+	
+	# c)
+	sample_mean = np.mean(samples)
+	sample_var = np.var(samples, ddof=1)
+	beta_mean, beta_var = beta.stats(a, b, moments="mv")
+	# beta_mean = a/(a+b)
+	# beta_var = (a*b)/(((a+b)**2)*(a+b+1))
+	print("sample mean = %.6f, "
+	"sample variance = %.6f"
+	% (sample_mean, sample_var))
+	print("true mean = %.6f, "
+	"true variance = %.6f"
+	% (beta_mean, beta_var))
+	
+	# d)
+	cp95_interval = np.percentile(samples, [2.5, 97.5])
+	print("The central 95%-intercal:" 
+	" {}".format(cp95_interval))
+	
+	plt.show()
+	
+	\end{lstlisting}
+\end{document} 

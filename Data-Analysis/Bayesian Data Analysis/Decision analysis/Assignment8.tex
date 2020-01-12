@@ -1,0 +1,57 @@
+\documentclass[article,11pt]{article}
+\usepackage{listingsutf8}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pythonhighlight}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{enumitem}   
+\title{\huge Bayesian Data Analysis - Assignment 8}
+\begin{document}
+ \maketitle
+ \section*{Decision analysis for the factory data}
+ From the known information, we can get the utility function:
+ \begin{equation*}
+ U=
+ \begin{cases}
+ 100& q \ge 85\\
+ -100& q<85 
+ \end{cases} 
+ \end{equation*}
+ 
+ \begin{equation*}
+  E(U) = 100P(q\ge 85)-100P(q<85)
+ \end{equation*}
+ \begin{table}[H]
+ 	\centering
+ 	\begin{tabular}{|c|c|}
+ 		\hline
+ 		\textbf{Machine Number} & \textbf{expected utility(euros)}    \\ \hline\hline
+ 		4  & 81.75   \\ \hline
+ 		2 & 72.40   \\ \hline
+ 		5 &29.15  \\ \hline
+ 		3 &20.90  \\ \hline
+ 		6 &15.60  \\ \hline
+ 		1 &-22.40  \\ \hline
+ 	\end{tabular}
+ 	\caption{Ranking of the expected utilities}
+ 	\label{tab:t1}
+ \end{table}
+\noindent{From the Table 1, we can get the following conclusion:}\\
+	1. The 4th machine can make the most profit, meaning that its quality is best. \\
+	2. Besides the 4th machine, the quality of the 2nd machine is also great. \\
+	3. The 5th, 3rd, 6th machine make profits which are not high. Their qualities are acceptable. \\
+	4. The only one machine which causes loss is the 1st machine. It has the worst quality and it is not profitable. This machine should be discarded or repaired.\\ \\
+	
+	\noindent{The expected utility of the 7th machine is 28. It is profitable, even though the expected utility is not so high. So buying a new(7th) machine is recommended.} \\ \\
+	
+	\appendix
+	\leftline{\LARGE \textbf{Appendix}}
+	\section{Stan}
+	\verbatiminput{hierarchical_factory.stan}
+	\section{R code}
+	\verbatiminput{factory.R}
+\end{document}
