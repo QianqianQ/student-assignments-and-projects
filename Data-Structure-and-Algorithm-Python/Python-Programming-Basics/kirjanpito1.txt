@@ -1,0 +1,10 @@
+nakit 2
+maito 1
+leipa 2
+juusto 1
+makkara 4
+leipa 1
+nakit 1
+maito 2
+tuulitakki 1
+juusto 1
